@@ -3,6 +3,10 @@ from discord.ext import commands, tasks
 import asyncio
 from itertools import cycle
 import os
+from dotenv import load_dotenv
+
+load_dotenv("token.env")
+TOKEN: str = os.getenv("TOKEN")
 
 intents = discord.Intents.default()
 intents.message_content = True  # ✅ Required for text commands
@@ -46,7 +50,8 @@ with open('token.txt','r') as file :
 async def main():
     async with bot:
         await load_extensions()
-        await bot.start(token)  # ✅ Replace with your bot token
+        await bot.start(TOKEN)  # ✅ Replace with your bot token
 
 if __name__ == "__main__":
     asyncio.run(main())  # ✅ Ensure async loop runs properly
+  
