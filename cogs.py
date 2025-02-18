@@ -47,6 +47,23 @@ with open('token.txt','r') as file :
     token = file.read()
 
 
+class RegData(discord.ui.Modal, title="Registration Data"):
+    
+    AuthID = discord.ui.TextInput(label="Auth ID", style=discord.TextStyle.short, placeholder="EX. - DSJI.EI3KJ#4$#.DS")
+    userName = discord.ui.TextInput(label="Your Team Name", style=discord.TextStyle.short, placeholder="EX. - your team name")
+
+    async def on_submit(self, interaction: discord.Interaction):
+        await interaction.response.send_message(f"Thank you for reporting AuthID: {self.AuthID} and team name: {self.userName}", ephemeral=True)
+
+
+@bot.tree.command(name="reg", description="Provide registration data")
+async def report(interaction: discord.Interaction):
+    modal = RegData()
+    await interaction.response.send_modal(modal)
+
+
+
+
 async def main():
     async with bot:
         await load_extensions()
